@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#wrap{
+			overflow: hidden;
+		}
+		#wrap li{
+			float: left;
+			width: 200px;
+			margin:5px 5px;  
+		}
+		#wrap li div{
+			background-color: #ccc;
+			border: 3px solid red;
+			font-size: 30px;
+			margin-top: 10px;
+		}
+		img{
+			width: 190px;
+		}
+	</style>
+</head>
+<body>
+	<ul id="wrap">
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<div id="liu"></div>
+	
+	<script type="text/javascript">
+		var wrap = document.getElementById('wrap');
+		var liu = document.getElementById('liu');
+		var list = document.getElementsByTagName('li');
+		liu.innerHTML = "<img src='https://www.baidu.com/img/bd_logo1.png' alt=''>";
+		function rnd(min,max){
+			return Math.floor(Math.random()*(max-min)+min);
+		}
+		function water(){
+            for(var i=0;i<9;i++){
+            	var inner = document.createElement('div');
+            	inner.innerHTML= "<img src='"+"img/p"+(i+1)+".jpg"+"' alt=''><p>"+i+"感觉心好累"+"</p>";
+            	// inner.style.height =rnd(200,400)+'px';
+            	var min =list[0];
+            	for(var j=0;j<list.length;j++){
+            		if(min.offsetHeight>list[j].offsetHeight){
+            			min =list[j];
+            		}
+            	}
+            	min.appendChild(inner);
+            }
+		}
+		water();
+		window.onscroll =function(){
+			if(wrap.getBoundingClientRect().bottom<=document.documentElement.clientHeight){
+				 water();
+			}
+		}
+	</script>
+</body>
+</html>
